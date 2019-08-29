@@ -1,8 +1,15 @@
-let canvas = document.getElementById("canvas");
-let ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-ctx.fillStyle = "black";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+const stage = new Polygon();
+stage.init([
+  [0, 80],
+  [40, 80],
+  [40, 0],
+  [100, 0],
+  [100, 100],
+  [90, 100],
+  [90, 20],
+  [80, 20],
+  [80, 100],
+  [0, 100],
+]);
+render(CTX,stage);
