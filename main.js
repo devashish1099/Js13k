@@ -2,14 +2,14 @@
 let canvas1 = document.getElementById("canvas1");
 let ctx1 = canvas1.getContext("2d");
 
-canvas1.width = window.innerWidth;
-canvas1.height = window.innerHeight;
+canvas1.width = GAME_WIDTH;
+canvas1.height = GAME_HEIGHT;
 
 let canvas2 = document.getElementById("canvas2");
 let ctx2 = canvas2.getContext("2d");
 
-canvas2.width = window.innerWidth;
-canvas2.height = window.innerHeight;
+canvas2.width = GAME_WIDTH;
+canvas2.height = GAME_HEIGHT;
 
 
 let waveTime = 100;
@@ -50,20 +50,110 @@ function emitWave(x,y){
     var id = requestAnimationFrame(waveEmiter);
 }
 
-const stage = new Polygon();
-stage.init([
-  [0, 80],
-  [40, 80],
-  [40, 0],
-  [100, 0],
-  [100, 100],
-  [90, 100],
-  [90, 20],
-  [80, 20],
-  [80, 100],
-  [0, 100],
+
+function Cell(x, y, width){
+  this.index = 1;
+  this.x = x;
+  this.y = y;
+  this.width = width;
+
+  this.drawCell = (ctx)=>{
+   ctx.fillStyle = 'red';
+   ctx.font = "8px Georgia";
+   ctx.fillText(this.index, this.x + this.width/2, this.y + this.width/2);
+   ctx.strokeRect(this.x, this.y, this.width,this.width);  
+  }
+}
+
+function Grid(offsetX, offsetY, rows, cols, cellWidth){
+  this.rows = rows;
+  this.cols = cols;
+  this.cellWidth = cellWidth;
+  this.cells  = [this.rows];
+  this.offsetX = offsetX;
+  this.offsetY  = offsetY;
+  for(let  i = 0 ; i< this.rows ; i++){
+   this.cells[i] = [this.cols];
+  }
+  this.init = ()=>{
+   let x = this.offsetX ;
+   let y = this.offsetY ;
+
+   for(let i = 0; i < this.rows; i++){
+      for(let j = 0 ; j < this.cols; j++){
+        this.cells[i][j] = new Cell(x, y, cellWidth);
+        x = x + cellWidth ;
+        if(i==0 || i==11 || j==0 || j== 13){
+          this.cells[i][j].index = 0 ;
+        } 
+        if(i>2 && j>2 && j<5){
+          this.cells[i][j].index = 0 ;
+        }
+        if(i>2 && i<9 && j==7){
+          this.cells[i][j].index = 0;
+        }
+        if(i<9 && j==10){
+          this.cells[i][j].index = 0;
+        }
+        if(i<7 && j>10){
+          this.cells[i][j].index = 0;
+        }
+      }
+      x = offsetX; 
+      y = y + cellWidth ;
+    } 
+
+  }
+  this.draw = (ctx)=>{
+    ctx.strokeStyle = "white";
+    for(let i = 0; i < this.rows; i++){
+      for(let j = 0 ; j< this.cols; j++){
+        this.cells[i][j].drawCell(ctx);
+      }
+
+    }
+  }
+
+}
+// var  x = innerWidth/4,
+// y = innerHeight/4,
+// finalX = 100*SCALE_X,
+// finalY = 100*SCALE_Y,
+// rows = Math.floor(finalY/),
+// cols = Math.floor(finalX/20);
+let  rows = 12;
+let cols = 14;
+const grid =  new Grid( 40, 0, rows , cols , CELL_WIDTH) ;
+grid.init();
+
+
+const stage1 = new Polygon();
+stage1.init([
+  [80,40],
+  [80, 440],
+  [160, 440],
+  [160, 120],
+  [240, 120],
+  [240, 440],
+  [560, 440],
+  [560, 280],
+  [480, 280],
+  [480, 360],
+  [440, 360],
+  [440, 40]
 ]);
-render(CTX,stage);
+
+const stage2 = new Polygon();
+stage2.init([
+  [320,120],
+  [320, 360],
+  [360, 360],
+  [360, 120]
+]);
+
+
+render(CTX,stage1);
+render(CTX,stage2);
 let time = 0;
 
 const footStepSound = new Audio('res/foot_steps0.mp3');
@@ -82,33 +172,25 @@ function playFootStep(){
   playSound(footStepSound1,v2);
 }
 
-var player = new Character (100,100);
+var player = new Character (OFFSET_X,OFFSET_Y);
 
 function renderObject(){
-    //ctx1.clearRect(0,0,canvas1.width,canvas1.height);
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
     ctx2.beginPath();
-    ctx2.arc(player.x,player.y,5,0,Math.PI*2);
-    ctx2.strokeStyle = "white";
-    ctx2.lineWidth = 10;
-    ctx2.stroke();
+    ctx2.arc(player.x,player.y,6,0,Math.PI*2);
+    ctx2.fillStyle = "white";
+    ctx2.fill();
     ctx2.closePath();
 }
 
+
+
+
 function update(){
-    player.x += player.vx;
-    player.y += player.vy;
-    // if (player.vx != 0 || player.vy != 0) {
-    //   emitWave(player);
-    // }
-    if(waveTime < 0){
-      emitWave(player.x, player.y);
-      waveTime = 25;  
-    }
-    waveTime--;
-    // emitWave(100, 100);
+    player.move(grid);
     renderObject();
     requestAnimationFrame(update);
+    grid.draw(ctx1);
 }
 
 requestAnimationFrame(update);

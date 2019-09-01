@@ -8,12 +8,36 @@ class Character {
         this.ay = ay;
     }
 
-    move(){
-        this.position += this.velocity;
+    move(grid){
+        let tempx = this.x,
+        tempy = this.y;
+        this.x += this.vx;
+        this.y += this.vy;
+        let checkradiusx = 6,
+        checkradiusy = 6;
+        if(this.vx==0)
+        checkradiusx = 0;
+        if(this.vy==0)
+        checkradiusy = 0;
+
+        if(this.vx<0)
+        checkradiusx = -6;
+        if(this.vy<0)
+        checkradiusy = -6;
+            
+       
+
+        if (grid.cells[Math.floor((this.y + checkradiusy)/40)][Math.floor((this.x-40 + checkradiusx)/40)].index == 0){
+            this.x = tempx;
+            this.y = tempy;
+        }
+
     }
 
     sprint(){
 
     }
+
+
     
 }
