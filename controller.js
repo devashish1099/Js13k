@@ -1,19 +1,19 @@
 function handleKeyDown(e){
     switch(e.code){
         case "KeyW":
-                player.vy = -1;
+                player.vy = -0.5;
             break;
         case "KeyA" :
-                player.vx = -1;
+                player.vx = -0.5;
             break;
         case "KeyS" :
-                player.vy = 1;
+                player.vy = 0.5;
             break;
         case "KeyD" :
-                player.vx = 1;
+                player.vx = 0.5;
             break;
         case "Space" :
-
+                player2.wave = true;
             break;
     }
 }
@@ -33,7 +33,7 @@ function handleKeyUp(e){
                 player.vx = 0;
             break;
         case "Space" :
-
+                player2.wave = false;
             break;
     }
 }
