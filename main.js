@@ -172,7 +172,7 @@ function playFootStep(){
   playSound(footStepSound1,v2);
 }
 
-var player = new Character (OFFSET_X,OFFSET_Y);
+var player = new Character (100,100);
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
