@@ -42,11 +42,7 @@ function emitWave(x,y){
         }
     }
 
-    // for (let i = 0; i < 20; i++) {
-    //     setTimeout(waveEmiter,t);  
-    //     t +=50;  
-    //     }
-    
+  
     var id = requestAnimationFrame(waveEmiter);
 }
 
