@@ -12,4 +12,8 @@ CTX.lineWidth = 10;
 CTX.lineCap = "round";
 CTX.lineJoin = "round";
 
+let waves = [];
+let PLAYER_VELOCITY = 0.5;
+let PLAYER_MAX_VELOCITY = 2;
+
 // CTX.translate(CANVAS.width / 4, CANVAS.height / 4);

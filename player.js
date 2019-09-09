@@ -33,6 +33,7 @@ class Character {
         this.i = 0;
         this.wx = this.x;
         this.wy = this.y; 
+        this.wt = 0;
     }
 
     waveEmiter(){
@@ -61,7 +62,16 @@ class Character {
         this.r += 1;
         this.lw -= 0.05;
         this.tr = this.tr / 1.05;
-        console.log(this.tr);
+       // console.log(this.tr);
+    }
+
+    startEmiting(){
+        waves.push(this);
+    }
+
+    stopEmiting(){
+        let index = waves.indexOf(this);
+        waves.splice(index,1);
     }
     
 }

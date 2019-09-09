@@ -91,9 +91,7 @@ function playFootStep(){
 
 var player = new Character (100,100);
 var player2 = new Character(500,500);
-let playerCounter = 0;
 function renderObject(){
-    if(playerCounter == 30){
       //ctx1.clearRect(0,0,canvas1.width,canvas1.height);
       ctx2.clearRect(0,0,canvas2.width,canvas2.height);
       ctx2.beginPath();
@@ -102,10 +100,6 @@ function renderObject(){
       ctx2.lineWidth = 10;
       ctx2.stroke();
       ctx2.closePath();
-      playerCounter=0;
-    }
-    playerCounter++;
-
 }
 
 function update(){
@@ -130,30 +124,38 @@ requestAnimationFrame(update);
 function globalWave(){
   ctx1.clearRect(0,0,canvas1.width,canvas1.height);  
 
-  if (player.wt>45) {
-    player.waveReset();
-    player.wt = 0;
-  }
-
-  player.wt++;
-
-  //player.waveEmiter();
-
-  // if (player.vx != 0 || player.vy != 0) {
-  //   player.waveEmiter();
-  //   playFootStep(); 
-  //   player.wt++;
+  // if (player.wt>45) {
+  //   player.waveReset();
+  //   player.wt = 0;
   // }
 
+  // player.wt++;
 
-  if (player2.wt>45) {
-    player2.waveReset();
-    player2.wt = 0;
-  }
+  // //player.waveEmiter();
 
-  player2.wt++;
+  // // if (player.vx != 0 || player.vy != 0) {
+  // //   player.waveEmiter();
+  // //   playFootStep(); 
+  // //   player.wt++;
+  // // }
+
+
+  // if (player2.wt>45) {
+  //   player2.waveReset();
+  //   player2.wt = 0;
+  // }
+
+  // player2.wt++;
 
   //player2.waveEmiter();  
+
+  for (let i = 0; i < waves.length; i++) {
+    waves[i].waveEmiter();
+    waves[i].wt++;
+    if (waves[i].wt > 45) {
+      waves[i].waveReset();
+    } 
+  }  
   
   requestAnimationFrame(globalWave);
 
