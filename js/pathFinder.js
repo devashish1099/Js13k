@@ -143,8 +143,8 @@ function updateNeighbours(r, c) {
     }
 }
 
-//Example demonstration(Uncomment to see it in action)
-// const level1 = {
+// Example demonstration(Uncomment to see it in action)
+// const level0 = {
 //     grid :  [
 //                 ['x' , 'x' , 'x' , 'x' , 'x' , 'x' , 'x' , 'x' , 'x' , 'x' ],
 //                 ['x' , '.' , '.' , 'x' , 'x' , 'x' , 'x' , '.' , '.' , 'x' ],
@@ -173,5 +173,5 @@ function updateNeighbours(r, c) {
 //     ],
 // };
 
-// initGrid(level1);
+// initGrid(level0);
 // console.log(findPath(1,1, 8, 2));

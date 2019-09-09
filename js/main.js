@@ -16,13 +16,13 @@ canvas2.height = GAME_HEIGHT;
 // finalY = 100*SCALE_Y,
 // rows = Math.floor(finalY/),
 // cols = Math.floor(finalX/20);
-
+initGrid(level1);
 let  rows = level1.rows;
 let cols = level1.columns;
 // console.log(rows,cols)
 const grid =  new Grid( 40, 0, rows , cols , CELL_WIDTH) ;
 grid.init(level1.grid);
-
+grid.draw(CTX);
 
 const stage1 = new Polygon();
 stage1.init([ 
@@ -71,6 +71,9 @@ stage2.init([
 // }
 
 var player = new Character (100, 100);
+var enemy = new Enemy(100,100);
+enemy.alertPath = findPath(1,1, 8, 2) ;
+enemy.move();
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
@@ -85,7 +88,35 @@ function update(){
     player.move(grid);
     renderObject();
     requestAnimationFrame(update);
-    grid.draw(ctx1);
+    
 }
 
+var ct = 0;
+
+function globalWave(){
+  ctx1.clearRect(0,0,canvas1.width,canvas1.height);  
+
+  for (let i = 0; i < waves.length; i++) {
+    waves[i].waveEmiter();
+    waves[i].wt++;
+    if (waves[i].wt > 45) {
+      waves[i].waveReset();
+    } 
+  }  
+
+  if (ct > 100) {
+    enemy.move();
+    ct = 0;
+  }
+  //console.log(ct);
+  ct++; 
+
+  requestAnimationFrame(globalWave);
+
+}
+
+globalWave();
+
 requestAnimationFrame(update);
+//enemy.startEmiting();
+//player.startEmiting();
