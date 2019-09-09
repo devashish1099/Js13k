@@ -16,14 +16,16 @@ canvas2.height = GAME_HEIGHT;
 // finalY = 100*SCALE_Y,
 // rows = Math.floor(finalY/),
 // cols = Math.floor(finalX/20);
-let  rows = 12;
-let cols = 14;
+
+let  rows = level1.rows;
+let cols = level1.columns;
+// console.log(rows,cols)
 const grid =  new Grid( 40, 0, rows , cols , CELL_WIDTH) ;
-grid.init();
+grid.init(level1.grid);
 
 
 const stage1 = new Polygon();
-stage1.init([
+stage1.init([ 
   [80,40],
   [80, 440],
   [160, 440],
@@ -47,8 +49,8 @@ stage2.init([
 ]);
 
 
-render(CTX,stage1);
-render(CTX,stage2);
+// render(CTX,stage1);
+// render(CTX,stage2);
 
 //let time = 0;
 
