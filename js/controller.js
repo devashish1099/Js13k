@@ -1,24 +1,37 @@
 function handleKeyDown(e){
+    
     switch(e.code){
         case "KeyW":
-                player.vy = -1;
+                player.vy = -PLAYER_VELOCITY;
             break;
         case "KeyA" :
-                player.vx = -1;
+                player.vx = -PLAYER_VELOCITY;
             break;
         case "KeyS" :
-                player.vy = 1;
+                player.vy = PLAYER_VELOCITY;
             break;
         case "KeyD" :
-                player.vx = 1;
+                player.vx = PLAYER_VELOCITY;
             break;
         case "Space" :
-
+                if (player.vx>0) {
+                    player.vx = PLAYER_MAX_VELOCITY ;
+                };
+                if (player.vx<0){
+                    player.vx = -PLAYER_MAX_VELOCITY ;
+                };
+                if(player.vy>0){
+                    player.vy = PLAYER_MAX_VELOCITY ;
+                };
+                if(player.vy<0){
+                    player.vy = -PLAYER_MAX_VELOCITY ;
+                }
             break;
     }
 }
 
 function handleKeyUp(e){
+    console.log(e.code);
     switch(e.code){
         case "KeyW" :
                 player.vy = 0;
@@ -33,7 +46,18 @@ function handleKeyUp(e){
                 player.vx = 0;
             break;
         case "Space" :
-
+            if (player.vx>0) {
+                player.vx = PLAYER_VELOCITY ;
+            };
+            if (player.vx<0){
+                player.vx = -PLAYER_VELOCITY ;
+            };
+            if(player.vy>0){
+                player.vy = PLAYER_VELOCITY ;
+            };
+            if(player.vy<0){
+                player.vy = -PLAYER_VELOCITY ;
+            }
             break;
     }
 }

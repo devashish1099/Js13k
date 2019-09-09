@@ -13,42 +13,42 @@ canvas2.height = GAME_HEIGHT;
 
 
 let waveTime = 100;
-function emitWave(x,y){
-    var r = 5;
-    var t = 50;
-    var lw = 7;
-    var tr = 1;
-    var i = 0;
+// function emitWave(x,y){
+//     var r = 5;
+//     var t = 50;
+//     var lw = 7;
+//     var tr = 1;
+//     var i = 0;
 
-    function waveEmiter(){
-        ctx1.clearRect(0,0,canvas1.width,canvas1.height);
-        ctx1.beginPath();
-        ctx1.arc(x,y,r,0,Math.PI*2);
-        ctx1.strokeStyle = "white";
-        ctx1.lineWidth = lw;
-        ctx1.globalAlpha = tr;
-        ctx1.stroke();
-        ctx1.closePath();
-        ctx1.beginPath();
-        ctx1.arc(x,y,r+13,0,Math.PI*2);
-        ctx1.stroke();
-        ctx1.closePath();
-        r += 1;
-        lw -= 0.05;
-        tr -= 0.025;
-        if(i<40){
-          id = requestAnimationFrame(waveEmiter);
-          i++;
-        }
-    }
+//     function waveEmiter(){
+//         ctx1.clearRect(0,0,canvas1.width,canvas1.height);
+//         ctx1.beginPath();
+//         ctx1.arc(x,y,r,0,Math.PI*2);
+//         ctx1.strokeStyle = "white";
+//         ctx1.lineWidth = lw;
+//         ctx1.globalAlpha = tr;
+//         ctx1.stroke();
+//         ctx1.closePath();
+//         ctx1.beginPath();
+//         ctx1.arc(x,y,r+13,0,Math.PI*2);
+//         ctx1.stroke();
+//         ctx1.closePath();
+//         r += 1;
+//         lw -= 0.05;
+//         tr -= 0.025;
+//         if(i<40){
+//           id = requestAnimationFrame(waveEmiter);
+//           i++;
+//         }
+//     }
 
-    // for (let i = 0; i < 20; i++) {
-    //     setTimeout(waveEmiter,t);  
-    //     t +=50;  
-    //     }
+//     // for (let i = 0; i < 20; i++) {
+//     //     setTimeout(waveEmiter,t);  
+//     //     t +=50;  
+//     //     }
     
-    var id = requestAnimationFrame(waveEmiter);
-}
+//     var id = requestAnimationFrame(waveEmiter);
+// }
 
 
 function Cell(x, y, width){
@@ -125,6 +125,7 @@ let  rows = 12;
 let cols = 14;
 const grid =  new Grid( 40, 0, rows , cols , CELL_WIDTH) ;
 grid.init();
+//grid.draw(CTX);
 
 
 const stage1 = new Polygon();
@@ -158,6 +159,13 @@ let time = 0;
 
 const footStepSound = new Audio('res/foot_steps0.mp3');
 const footStepSound1 = new Audio('res/foot_steps1.mp3');
+footStepSound.onloadeddata =()=>{
+  console.log("yup");
+  }
+  
+footStepSound1.onloadeddata =()=>{
+  console.log("yup");
+}
 
 document.getElementById("btn").onclick = function(){
   playFootStep();
@@ -172,7 +180,7 @@ function playFootStep(){
   playSound(footStepSound1,v2);
 }
 
-var player = new Character (OFFSET_X,OFFSET_Y);
+var player = new Character (100,100);
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
@@ -189,8 +197,53 @@ function renderObject(){
 function update(){
     player.move(grid);
     renderObject();
+    //emitWave(500,500);
     requestAnimationFrame(update);
     grid.draw(ctx1);
 }
 
 requestAnimationFrame(update);
+
+function globalWave(){
+  ctx1.clearRect(0,0,canvas1.width,canvas1.height);  
+
+  // if (player.wt>45) {
+  //   player.waveReset();
+  //   player.wt = 0;
+  // }
+
+  // player.wt++;
+
+  // //player.waveEmiter();
+
+  // // if (player.vx != 0 || player.vy != 0) {
+  // //   player.waveEmiter();
+  // //   playFootStep(); 
+  // //   player.wt++;
+  // // }
+
+
+  // if (player2.wt>45) {
+  //   player2.waveReset();
+  //   player2.wt = 0;
+  // }
+
+  // player2.wt++;
+
+  //player2.waveEmiter();  
+
+  for (let i = 0; i < waves.length; i++) {
+    waves[i].waveEmiter();
+    waves[i].wt++;
+    if (waves[i].wt > 45) {
+      waves[i].waveReset();
+    } 
+  }  
+  
+  requestAnimationFrame(globalWave);
+
+}
+
+globalWave();
+
+//setInterval(globalWave,1000);
