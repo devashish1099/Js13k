@@ -4,16 +4,31 @@ class Enemy extends Character {
         this.normalPath = [];
         this.alertPath = [];
         this.isMoving = false;
-        this.i = 0;
+        this.i = 1;
     }
 
-    move(){
+    displacement(){
         if(this.i == (this.alertPath.length-1)){
-           this.i=0; 
+            this.i=1; 
+         }
+        var dx = this.alertPath[this.i][0] * 10 - this.alertPath[this.i - 1][0] * 10;
+        var dy = this.alertPath[this.i][1] * 10 - this.alertPath[this.i - 1][1] * 10;
+
+        this.move(dx,dy);
+
+        this.i++;
+        console.log(dx,dy);
+            
+         
         }
-            var dx = this.alertPath[this.i][0] * 10 - this.x;
-            var dy = this.alertPath[this.i][1] * 10 - this.y;
-            // if (this.x != this.alertPath[this.i][0] && this.y != this.alertPath[this.i][1] && !this.isMoving) {
+
+    move(dx,dy){
+        // if(this.i == (this.alertPath.length-1)){
+        //    this.i=0; 
+        // }
+        //     var dx = this.alertPath[this.i][0] * 10 - this.x;
+        //     var dy = this.alertPath[this.i][1] * 10 - this.y;
+        //     // if (this.x != this.alertPath[this.i][0] && this.y != this.alertPath[this.i][1] && !this.isMoving) {
             //     this.startEmiting();
             //     this.isMoving = true; 
             //     console.log("hey1");
@@ -29,8 +44,8 @@ class Enemy extends Character {
             this.y += dy;
 
             //this.alertPath.splice[0,1];
-            this.i++;
-            console.log(dx,dy);
+            // this.i++;
+            // console.log(dx,dy);
             
     }
 }

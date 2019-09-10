@@ -181,6 +181,7 @@ function playFootStep(){
 }
 
 var player = new Character (100,100);
+var enemy = new Enemy(100,100);
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
@@ -202,9 +203,12 @@ function update(){
     grid.draw(ctx1);
 }
 
-requestAnimationFrame(update);
+update();
+
+var ct = 0 ;
 
 function globalWave(){
+  console.log("yup");
   ctx1.clearRect(0,0,canvas1.width,canvas1.height);  
 
   // if (player.wt>45) {
@@ -239,6 +243,13 @@ function globalWave(){
       waves[i].waveReset();
     } 
   }  
+  if (ct > 45) {
+    
+    enemy.displacement(); 
+    ct = 0; 
+  }
+  ct++;
+
   
   requestAnimationFrame(globalWave);
 
