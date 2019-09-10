@@ -41,19 +41,24 @@ function renderObject(){
 
 function update(){
     if(keys.UP){
+      if(!keys.DOWN)
       player.vy = -PLAYER_VELOCITY;
     }
 
     if(keys.DOWN){
+      if(!keys.UP)
         player.vy = PLAYER_VELOCITY;
     }
 
     if(keys.LEFT){
+      if(!keys.RIGHT)
         player.vx = -PLAYER_VELOCITY;
     }
 
     if(keys.RIGHT){
+      if(!keys.LEFT)
         player.vx = PLAYER_VELOCITY;
+
     }
     if(keys.BOOST){
       if(player.vx>0)
