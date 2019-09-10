@@ -1,4 +1,21 @@
 
+const loadingScreen = document.querySelector('.loading_screen'),
+gameMenuScreen = document.querySelector('.game_menu_screen'),
+storyScreen= document.querySelector('.story_screen'),
+screens = [loadingScreen,gameMenuScreen,storyScreen],
+declineBtn = document.querySelector('.decline'),
+playBtn = document.querySelector('#img');
+declineBtn.onclick = ()=>{
+  declineBtn.innerHTML = 'Sorry, Button is not working';
+  declineBtn.style = "background-color:red;color:black";
+}
+playBtn.onclick = ()=>{
+  screens[2].style ="transform:translateY(-100vh);z-index:3";
+}
+
+// screens[0].styte.transform = "translateY(100vh)";
+// screens[1].styte.transform = "translateY(-100vh)";
+
 let canvas1 = document.getElementById("canvas1");
 let ctx1 = canvas1.getContext("2d");
 

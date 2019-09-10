@@ -25,6 +25,7 @@
 .loading_screen{
   position: relative;
   height: 100vh;
+  transition: all 4s ease-in-out;
 }
 .game_title {
   position:absolute;
@@ -102,6 +103,8 @@
 
 }
 .game_menu_screen{
+  transition: all 4s ease-in-out;
+  /* animation-duration: 4s; */
   height: 100vh;
   width:100%;
   background-color: black;
@@ -149,6 +152,7 @@
 
 
 .story_screen{
+  transition: all 4s ease-in-out;
   overflow: hidden;
   height:100vh;
   background-color: black;
@@ -208,6 +212,7 @@
 }
 .story_screen button{
   margin-left:100px;
+  outline:none;
   height:70px;
   width:200px;
   border: 2px solid  red;
@@ -223,6 +228,11 @@
 }
 .story_screen button:hover{
   background-color: red;
+  color:black;
+}
+
+.story_screen button:nth-child(2):clicked{
+  background-color:aqua;
   color:black;
 }
 
