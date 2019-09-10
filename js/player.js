@@ -15,6 +15,10 @@ class Character {
         this.wy = this.y;
         this.wt = 40;
         this.wave = false;
+        this.normalPath = [];
+        this.alertPath = [];
+        this.isMoving = false;
+        this.i = 1;
     }
 
     move(grid){
@@ -94,6 +98,52 @@ class Character {
     stopEmiting(){
         let index = waves.indexOf(this);
         waves.splice(index,1);
+    }
+
+    displacement(){
+        if(this.i == (this.alertPath.length-1)){
+            this.i=1; 
+         }
+         console.log(this.i-1);
+         
+        var dx = this.alertPath[this.i][0] * 10 - this.alertPath[this.i - 1][0] * 10;
+        var dy = this.alertPath[this.i][1] * 10 - this.alertPath[this.i - 1][1] * 10;
+
+        this.enemyMove(dx,dy);
+
+        this.i++;
+        //console.log(this.i);
+        
+       // console.log(dx,dy);
+            
+         
+        }
+
+    enemyMove(dx,dy){
+        // if(this.i == (this.alertPath.length-1)){
+        //    this.i=0; 
+        // }
+        //     var dx = this.alertPath[this.i][0] * 10 - this.x;
+        //     var dy = this.alertPath[this.i][1] * 10 - this.y;
+        //     // if (this.x != this.alertPath[this.i][0] && this.y != this.alertPath[this.i][1] && !this.isMoving) {
+            //     this.startEmiting();
+            //     this.isMoving = true; 
+            //     console.log("hey1");
+            // }
+            // if (this.x == this.alertPath[this.i][0] && this.y == this.alertPath[this.i][1] && this.isMoving ) {
+            //     this.stopEmiting();
+            //     this.isMoving = false; 
+            //     console.log("hey2"); 
+            // }
+
+
+            this.x += dx;
+            this.y += dy;
+
+            //this.alertPath.splice[0,1];
+            // this.i++;
+            // console.log(dx,dy);
+            
     }
 
 

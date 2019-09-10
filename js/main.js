@@ -71,9 +71,9 @@ stage2.init([
 // }
 
 var player = new Character (100, 100);
-var enemy = new Enemy(100,100);
+var enemy = new Character(100,100);
 enemy.alertPath = findPath(1,1, 8, 2) ;
-enemy.move();
+enemy.displacement();
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
@@ -105,7 +105,7 @@ function globalWave(){
   }  
 
   if (ct > 100) {
-    enemy.move();
+    enemy.displacement();
     ct = 0;
   }
   //console.log(ct);
