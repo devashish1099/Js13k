@@ -68,7 +68,7 @@ function findPath(r1, c1, r2, c2) {
     path[0][0] = destinationNode.row;
     path[0][1] = destinationNode.column;
     
-    for(let i = destinationNode.distanceFromSource, j = 1; i >= 0 ; i--,j++){
+    for(let i = destinationNode.distanceFromSource, j = 1; i > 0 ; i--,j++){
         path[j] = [];
         let neighbourArray = getNeighbours(path[j - 1][0], path[j - 1][1], 0);
         for(neighbourIndex in neighbourArray){
