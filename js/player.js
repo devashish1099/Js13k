@@ -20,6 +20,8 @@ class Character {
         this.boostx = 0;
         this.boosty = 0;
         this.upateCellPosition();
+        this.footStepSound = new Audio('res/foot_steps0.mp3');
+        
         // this.normalPath = [];
         // this.alertPath = [];
         // this.isMoving = false;
@@ -105,15 +107,22 @@ class Character {
 
     startEmiting(){
         waves.push(this);
-        console.log(waves);
     }
 
     stopEmiting(){
         let index = waves.indexOf(this);
         waves.splice(index,1);
-        console.log(waves);
     }
 
+    isAtCell(row, col){ 
+        if(this.row == row && this.col == col){
+            return true;
+        }
+        return false;
+    }
+    shareSameCell(player){
+        return this.isAtCell(player.row, player.col);
+    }
     
 
 

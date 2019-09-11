@@ -24,5 +24,8 @@ CTX.lineWidth = 8;
 CTX.lineCap = "round";
 CTX.lineJoin = "round";
 
+const footStepSound = new Audio('res/foot_steps0.mp3');
+const footStepSound1 = new Audio('res/foot_steps1.mp3');
+
 
 // CTX.translate(CANVAS.width / 4, CANVAS.height / 4);

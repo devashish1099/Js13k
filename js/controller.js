@@ -44,7 +44,6 @@ function handleKeyDown(e){
 }
 
 function handleKeyUp(e){
-    console.log(e.code);
     switch(e.code){
         case "KeyW" :
                 // player.vy = 0;

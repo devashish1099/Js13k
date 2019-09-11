@@ -11,6 +11,8 @@ let graphGrid = [];
 const XDir = [1, 0, -1, 0];
 const YDir = [0, 1, 0, -1];
 
+let priorityQueue = [];
+
 
 //Class to store Node data
 class Graph_Node {
@@ -40,6 +42,7 @@ function isWalkable(r, c){
 function initGrid(level) {
     let row = level.rows;
     let column = level.columns;
+    graphGrid = [];
 
     for (let i = 0; i < row; i++) {
         graphGrid[i] = [];
@@ -52,6 +55,7 @@ function initGrid(level) {
 
         }
     }
+
 }
 
 function findPath(r1, c1, r2, c2) {
@@ -61,6 +65,7 @@ function findPath(r1, c1, r2, c2) {
     startNode.distanceFromSource = 0;
     startNode.visited = true;
 
+    priorityQueue = [];
     djikstrasAlgo(r1, c1, r2, c2);
 
     let path = [];
@@ -95,17 +100,23 @@ function getNeighbours(r, c , visitCheck = 1){
     }
     return neighbhourArray;
 }
+
 function djikstrasAlgo(r, c, rd, cd){
-    if(r == rd && c == cd){
-        return 1;
+    let start = graphGrid[r][c];
+    priorityQueue.push(start);
+    start.visited = true;
+
+    while(priorityQueue.length > 0){
+        let cell = priorityQueue.splice(0,1)[0];
+        if(cell.row == rd && cell.column == cd) {return 1};
+        cell.visited = true;
+        updateNeighbours(cell.row, cell.column); 
+        let neighbhourArray = getNeighbours(cell.row, cell.column);
+        for(cellIndex in neighbhourArray){
+            priorityQueue.push(neighbhourArray[cellIndex]);
+        }
     }
-    graphGrid[r][c].visited = true;
-    updateNeighbours(r, c);
-    let neighbourArray = getNeighbours(r, c);
-    for(neighbourIndex in neighbourArray){
-        let neighbourNode = neighbourArray[neighbourIndex];
-        djikstrasAlgo(neighbourNode.row, neighbourNode.column, rd, cd);
-    }
+
     return 0;
 }
 //returns a 2d array for distance visualisation
