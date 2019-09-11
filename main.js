@@ -9,12 +9,17 @@ declineBtn.onclick = ()=>{
   declineBtn.innerHTML = 'Sorry, Button is not working';
   declineBtn.style = "background-color:red;color:black";
 }
+
+
+window.setTimeout(()=>{
+   screens[0].style = "opacity:0" ;
+   screens[1].style = "opacity:1; transform:translateY(-100vh)"} ,2000) ;
+
 playBtn.onclick = ()=>{
-  screens[2].style ="transform:translateY(-100vh);z-index:3";
+  screens[1].style = "opacity:0"
+  screens[2].style = "transform:translateY(-200vh);opacity:1";
 }
 
-// screens[0].styte.transform = "translateY(100vh)";
-// screens[1].styte.transform = "translateY(-100vh)";
 
 let canvas1 = document.getElementById("canvas1");
 let ctx1 = canvas1.getContext("2d");
