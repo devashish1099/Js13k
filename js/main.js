@@ -17,88 +17,94 @@ canvas2.height = GAME_HEIGHT;
 // rows = Math.floor(finalY/),
 // cols = Math.floor(finalX/20);
 initGrid(level1);
-let  rows = level1.rows;
+let rows = level1.rows;
 let cols = level1.columns;
 // console.log(rows,cols)
-const grid =  new Grid( 40, 0, rows , cols , CELL_WIDTH) ;
+const grid = new Grid(40, 0, rows, cols, CELL_WIDTH);
 grid.init(level1.grid);
 grid.draw(CTX);
 
 
-var player = new Character (1, 1);
-var enemy = new Enemy(2, 8);
-enemy.alertPath = findPath(1,1, 8, 2) ;
+var player = new Character(1, 1);
+var enemy = new Enemy(level1.enemies[0][0], level1.enemies[0][1]);
+var enemy2 = new Enemy(level1.enemies[1][0], level1.enemies[1][1])
+enemy.normalPath = level1.enemies[0];
+enemy2.normalPath = level1.enemies[1];
+enemy.findNormalPath();
+enemy2.findNormalPath();
+enemy.alertPath = findPath(1, 1, 8, 2);
 enemy.displacement();
 
-function renderObject(){
-    ctx2.clearRect(0,0,canvas2.width,canvas2.height);
-    ctx2.beginPath();
-    ctx2.arc(player.x,player.y,6,0,Math.PI*2);
-    ctx2.fillStyle = "white";
-    ctx2.fill();
-    ctx2.closePath();
+function renderObject() {
+  ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+  ctx2.beginPath();
+  ctx2.arc(player.x, player.y, 6, 0, Math.PI * 2);
+  ctx2.fillStyle = "white";
+  ctx2.fill();
+  ctx2.closePath();
 }
 
-function update(){
-    if(keys.UP){
-      if(!keys.DOWN)
+function update() {
+  if (keys.UP) {
+    if (!keys.DOWN)
       player.vy = -PLAYER_VELOCITY;
-    }
-
-    if(keys.DOWN){
-      if(!keys.UP)
-        player.vy = PLAYER_VELOCITY;
-    }
-
-    if(keys.LEFT){
-      if(!keys.RIGHT)
-        player.vx = -PLAYER_VELOCITY;
-    }
-
-    if(keys.RIGHT){
-      if(!keys.LEFT)
-        player.vx = PLAYER_VELOCITY;
-
-    }
-    if(keys.BOOST){
-      if(player.vx>0)
-      player.boostx = PLAYER_VELOCITY;
-      if(player.vx<0)
-      player.boostx = -PLAYER_VELOCITY;
-      if(player.vy >0)
-      player.boosty = PLAYER_VELOCITY;
-      if(player.vy <0)
-      player.boosty = -PLAYER_VELOCITY;
-    }
-      player.move(grid);
-
-      player.vx = 0;
-      player.vy = 0;
-      player.boostx = 0;
-      player.boosty = 0;
-      renderObject();
-      requestAnimationFrame(update); 
   }
+
+  if (keys.DOWN) {
+    if (!keys.UP)
+      player.vy = PLAYER_VELOCITY;
+  }
+
+  if (keys.LEFT) {
+    if (!keys.RIGHT)
+      player.vx = -PLAYER_VELOCITY;
+  }
+
+  if (keys.RIGHT) {
+    if (!keys.LEFT)
+      player.vx = PLAYER_VELOCITY;
+
+  }
+  if (keys.BOOST) {
+    if (player.vx > 0)
+      player.boostx = PLAYER_VELOCITY;
+    if (player.vx < 0)
+      player.boostx = -PLAYER_VELOCITY;
+    if (player.vy > 0)
+      player.boosty = PLAYER_VELOCITY;
+    if (player.vy < 0)
+      player.boosty = -PLAYER_VELOCITY;
+  }
+  player.move(grid);
+
+  player.vx = 0;
+  player.vy = 0;
+  player.boostx = 0;
+  player.boosty = 0;
+  renderObject();
+  requestAnimationFrame(update);
+}
 
 var ct = 0;
 
-function globalWave(){
-  ctx1.clearRect(0,0,canvas1.width,canvas1.height);  
+function globalWave() {
+  ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
 
   for (let i = 0; i < waves.length; i++) {
     waves[i].waveEmiter();
     waves[i].wt++;
     if (waves[i].wt > 45) {
       waves[i].waveReset();
-    } 
-  }  
+    }
+  }
 
   if (ct > 45) {
     enemy.displacement();
+    enemy2.displacement();
     ct = 0;
   }
   //console.log(ct);
-  ct++; 
+  ct++;
 
   requestAnimationFrame(globalWave);
 
@@ -160,3 +166,17 @@ requestAnimationFrame(update);
 // }
 
 // }
+
+// function startLevel(level1) {
+//   initGrid(level1);
+//   let rows = level1.rows;
+//   let cols = level1.columns;
+//   // console.log(rows,cols)
+//   const grid = new Grid(40, 0, rows, cols, CELL_WIDTH);
+//   grid.init(level1.grid);
+//   grid.draw(CTX);
+
+// }
+
+
+// startLevel(level1);

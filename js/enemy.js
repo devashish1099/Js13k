@@ -5,21 +5,23 @@ class Enemy extends Character {
         this.normalPath = [];
         this.alertPath = [];
         this.isMoving = false;
-        this.alertPathIndex = 1;
-        this.startEmiting();
+        this.normalPathIndex = 1;
+        //this.startEmiting();
     }
 
     displacement(){
-        if(this.alertPathIndex > (this.alertPath.length - 1)){
-            this.alertPathIndex=1; 
+
+        
+        if(this.normalPathIndex > (this.normalPath.length - 1)){
+            this.normalPathIndex=1; 
          }
-        // console.log(this.alertPathIndex);
-        let dx = (this.alertPath[this.alertPathIndex][1]  - this.alertPath[this.alertPathIndex - 1][1]);
-        let dy = (this.alertPath[this.alertPathIndex][0]  - this.alertPath[this.alertPathIndex - 1][0]);
+        console.log(this.normalPathIndex);
+        let dx = (this.normalPath[this.normalPathIndex][0]  - this.normalPath[this.normalPathIndex - 1][0]);
+        let dy = (this.normalPath[this.normalPathIndex][1]  - this.normalPath[this.normalPathIndex - 1][1]);
 
         this.move(dx,dy);
         // console.log(dx, dy);
-        this.alertPathIndex++;
+        this.normalPathIndex++;
         }
 
     move(dx,dy){
@@ -48,5 +50,57 @@ class Enemy extends Character {
             // this.i++;
             // console.log(dx,dy);
             
+    }
+
+    findNormalPath(){
+        var x1 = this.normalPath[0];
+        var y1 = this.normalPath[1];
+        var x2 = this.normalPath[2];
+        var y2 = this.normalPath[3];
+        var x3 = x2;
+        var y3 = y2;
+        if (x1<x2) {
+            x3 = x1;
+        }
+        if (y1<y2) {
+            y3 = y1;
+        }
+        this.startEmiting();
+        if (y1 == y2) {
+            for (let index = 0; index < Math.abs(x2-x1) + 1; index++) {
+                this.normalPath[index] = [];
+                //console.log(Math.abs(x2-x1));
+                this.normalPath[index][0] = x3;
+                this.normalPath[index][1] = y1;
+                x3++;
+            }
+            x3--;
+            for (let index = Math.abs(x2-x1) + 1; index < Math.abs(x2-x1)*2 + 1 ; index++) {
+                this.normalPath[index] = [];
+                //console.log(Math.abs(x2-x1));
+                x3--;
+                this.normalPath[index][0] = x3;
+                this.normalPath[index][1] = y1;
+            }     
+        }
+
+        if (x1 == x2) {
+            for (let index = 0; index < Math.abs(y2-y1) + 1; index++) {
+                this.normalPath[index] = [];
+                this.normalPath[index][0] = x1;
+                this.normalPath[index][1] = y3;
+                y3++;
+            }
+            y3--;
+            for (let index = Math.abs(y2-y1) + 1; index < Math.abs(y2-y1)*2 + 1 ; index++) {
+                this.normalPath[index] = [];
+                y3--;
+                this.normalPath[index][0] = x1;
+                this.normalPath[index][1] = y3;
+            }    
+        }
+        
+
+
     }
 }

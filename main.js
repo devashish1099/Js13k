@@ -181,10 +181,6 @@ function playFootStep(){
 }
 
 var player = new Character (100,100);
-<<<<<<< HEAD
-=======
-var enemy = new Character (10 ,100);
->>>>>>> e0b3c9e0ec7345646a6e0a9b085702cf3503059a
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);

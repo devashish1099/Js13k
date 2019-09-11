@@ -18,7 +18,7 @@ const level1 = {
     playerAt : [1, 1],
     exitAt : [1, 8],
     enemies : [
-                [1, 7, 14, 7],
+                [1, 8, 12, 8],
                 [11, 4, 11, 7]
     ]
 

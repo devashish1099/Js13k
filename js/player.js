@@ -55,7 +55,7 @@ class Character {
             this.y = tempy;
         }
         this.upateCellPosition();
-        console.log(this.row,this.col);
+        // console.log(this.row,this.col);
 
     }
 
