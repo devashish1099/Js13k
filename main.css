@@ -1,29 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata&display=swap');
 * {
   overflow:none;
   padding: 0px;
   margin: 0px;
-  background-color:black;
 }
 body{
-  /* overflow: hidden; */
+  overflow: hidden;
   background-color:black;
 
 }
-#canvas1{
-  display: none;
-}
-#canvas{
-  display: none;
-}
-#canvas2{
-  display: none;
+
+.black{
+  background-color: black
 }
 
 .main_wrapper {
 
   height: 100vh;
-  background-color: black;
 }
 .flex{
   display: flex;
@@ -100,7 +92,6 @@ body{
 .game_play_button {}
 
 .loading {
-  /* position:absolute; */
   top: 97vh;
   left: 2vw;
   animation-duration: 8s;
@@ -110,9 +101,7 @@ body{
 
 }
 .game_menu_screen{
-  /* transition: transform 4s ease-in-out; */
   transition: opacity 4s ease-in-out;
-  /* animation-duration: 4s; */
   height: 100vh;
   width:100%;
   background-color: black;
@@ -235,11 +224,11 @@ body{
   font-size:25px;
   font-family: 'Inconsolata', monospace;
   animation-name: appear;
-  /* opacity: 0; */
   transition:all .4s;
   animation-delay:31s;
   animation-duration: 2s;
   animation-fill-mode: forwards;
+  background-color: black;
 }
 .story_screen button:hover{
   background-color: red;
@@ -250,32 +239,40 @@ body{
   background-color:aqua;
   color:black;
 }
-.main_game_screen{
+
+.find_the_exit{ 
   height:100vh;
   display:flex;
   justify-content: center;
   align-items:center;
-  transition:all 1.4s ease-in-out;
-  opacity: 0;
-}
-.find_the_exit{
-text-align: center;
+  text-align: center;
   color:red;
   font-size: 130px;
   letter-spacing: 10px;
-  line-height: 100%;
   width: 90%;
-  transition: all .4s ease-in-out;
+  transition: all 2s ease-in-out;
   
 }
+.traps{
+  height:100vh;
+  display:flex;
+  justify-content: center;
+  justify-content: center;
+  text-align: center;
+  color:red;
+  font-size: 130px;
+  letter-spacing: 10px;
+  width: 90%;
+  transition: all 2s ease-in-out;
+    
+  }
 .game_canvas{
   color:red;
   height:100vh;
   position: relative;
   transition:all 1.4s ease-in-out;
-  /* opacity: 0; */
+  opacity:0;
 }
-
 @keyframes loading1 {
   from {
     color: white;
@@ -307,7 +304,6 @@ text-align: center;
   to { 
      opacity: 1;
       width: 101% ;
-      /* border-color:transparent;  */
   }
 }
 
@@ -329,12 +325,3 @@ text-align: center;
   }
 }
 
-#canvas10 {
-  /* background-color: rgba(255,255,255,0.1); */
-  z-index: 1;
-  height: 100%;
-  width: 100%;
-  /* position:absolute; */
-  top: 0px;
-  left: 0px;
-}

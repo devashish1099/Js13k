@@ -1,49 +1,4 @@
 
-const loadingScreen = document.querySelector('.loading_screen'),
-gameMenuScreen = document.querySelector('.game_menu_screen'),
-storyScreen= document.querySelector('.story_screen'),
-mainGameScreen = document.querySelector('.main_game_screen'),
-gameCanvasScreen = document.querySelector('.game_canvas'),
-screens = [loadingScreen,gameMenuScreen,storyScreen,mainGameScreen,gameCanvasScreen],
-declineBtn = document.querySelector('.decline'),
-accepBtn = document.querySelector('.accept'),
-playBtn = document.querySelector('#img');
-declineBtn.onclick = ()=>{
-  declineBtn.innerHTML = 'Sorry, Button is not working';
-  declineBtn.style = "background-color:red;color:black";
-}
-
-window.setTimeout(()=>{
-   screens[0].style = "opacity:0";
-   screens[1].style = "opacity:1; transform:translateY(-100vh)";
-   document.querySelector('.play_text').style.WebkitAnimationPlayState = "running";} ,3000) ;
-
-playBtn.onclick = ()=>{
-  screens[1].style = "opacity:0";
-  for(let i = 0 ; i< 6; i++)
-  screens[2].children[i].style.WebkitAnimationPlayState = "running";
-  screens[2].style = "transform:translateY(-200vh);opacity:1;display:block";
-}
-accepBtn.onclick = ()=>{
-  screens[2].style = "opacity:0";
-  screens[3].style = "opacity:1; transform:translateY(-300vh)";
-  window.setTimeout(()=>{
-    screens[3].children[0].style = "transform:translateX(-300vh)";
-    console.log(screens[3].children[1]);
-    screens[3].children[1].style = "transform:translateX(-300vh)";
-  },2000) ;
-  window.setTimeout(()=>{
-    screens[3].children[1].style = "transform:translateX(-300vh)";
-  },3000) ;
-  window.setTimeout(()=>{
-    screens[4].style = "opacity:1;transform:translateY(-400vh) ";
-
-  },3500) ;
-
-
-}
-
-
 let canvas1 = document.getElementById("canvas1");
 let ctx1 = canvas1.getContext("2d");
 
@@ -202,8 +157,7 @@ render(CTX,stage1);
 render(CTX,stage2);
 let time = 0;
 
-const footStepSound = new Audio('res/foot_steps0.mp3');
-const footStepSound1 = new Audio('res/foot_steps1.mp3');
+
 footStepSound.onloadeddata =()=>{
   console.log("yup");
   }
@@ -221,11 +175,12 @@ document.getElementById("btn").onclick = function(){
 function playFootStep(){
   let v1 = Math.abs(Math.sin(time));
   let v2 = Math.abs(Math.sin(time + 0.1));
-  playSound(footStepSound,v1);
+  
   playSound(footStepSound1,v2);
 }
 
 var player = new Character (100,100);
+var enemy = new Enemy(100,100);
 
 function renderObject(){
     ctx2.clearRect(0,0,canvas2.width,canvas2.height);
@@ -247,9 +202,12 @@ function update(){
     grid.draw(ctx1);
 }
 
-requestAnimationFrame(update);
+update();
+
+var ct = 0 ;
 
 function globalWave(){
+  console.log("yup");
   ctx1.clearRect(0,0,canvas1.width,canvas1.height);  
 
   // if (player.wt>45) {
@@ -284,6 +242,13 @@ function globalWave(){
       waves[i].waveReset();
     } 
   }  
+  if (ct > 45) {
+    
+    enemy.displacement(); 
+    ct = 0; 
+  }
+  ct++;
+
   
   requestAnimationFrame(globalWave);
 

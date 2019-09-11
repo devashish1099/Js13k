@@ -6,7 +6,7 @@
 <body style =" margin: 0px">
   <div class = "main_wrapper">
 
-    <div class="loading_screen">
+    <div class="loading_screen black">
     <div class ="game_title"> 
       <span class="part1"> 
         WATCH YOUR
@@ -22,7 +22,7 @@
         <span>.</span>
       </div>
     </div>
-    <div class="game_menu_screen">
+    <div class="game_menu_screen ">
       <div class="game_play_button flex">
         <img id = "img" src = "res/images/play-button (1).svg">
         <div class ="play_text">DIVE <span> IN</span></div>
@@ -41,11 +41,14 @@
     </div>
 
     </div>
-    <div class="main_game_screen">
-      <div class="find_the_exit">FIND THE EXIT </div>
-    </div>
-    <div class ="game_canvas">
-      HELLO BUDDY
+    <div class="find_the_exit black">FIND THE EXIT </div>
+    <div class="traps black">BEAWARE OF TRAPS </div>
+      
+    <div class ="game_canvas black" style ="position:relative">
+      <!-- HELLO BUDDY -->
+      <canvas id="canvas" style="position: absolute"></canvas>
+      <canvas id="canvas1" style="position: absolute"></canvas>
+      <canvas id="canvas2" style="position: absolute"></canvas>
     </div>
 
 
@@ -53,16 +56,19 @@
 
 
   </div>
-    <!-- <canvas id="canvas" style="position: absolute"></canvas>
-    <canvas id="canvas1" style="position: absolute"></canvas>
-    <canvas id="canvas2" style="position: absolute"></canvas>
-    <button id = "btn">Play</btn> -->
+   
+   
+  
+    <script src = "js/geometry.js"></script>
+    <script src = "js/sound.js"></script>
+    <script src = "js/controller.js"></script>
+    <script src = "js/player.js"></script>
+    <script src = "js/enemy.js"></script>
+    <script src = "js/levels.js"></script>
+    <script src = "js/grid.js"></script>
+    <script src = "js/pathFinder.js"></script>
 
-    <script src = "geometry.js"></script>
-    <script src = "sound.js"></script>
-    <script src = "controller.js"></script>
-    <script src = "player.js"></script>
-    <script src = "init.js"></script>
-    <script src = "main.js"></script>
+    <script src = "js/init.js"></script>
+    <script src = "js/main.js"></script>
 </body>
 </html>
