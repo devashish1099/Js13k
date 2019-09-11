@@ -2,22 +2,37 @@
 const loadingScreen = document.querySelector('.loading_screen'),
 gameMenuScreen = document.querySelector('.game_menu_screen'),
 storyScreen= document.querySelector('.story_screen'),
-screens = [loadingScreen,gameMenuScreen,storyScreen],
+mainGameScreen = document.querySelector('.main_game_screen'),
+gameCanvasScreen = document.querySelector('.game_canvas'),
+screens = [loadingScreen,gameMenuScreen,storyScreen,mainGameScreen,gameCanvasScreen],
 declineBtn = document.querySelector('.decline'),
+accepBtn = document.querySelector('.accept'),
 playBtn = document.querySelector('#img');
 declineBtn.onclick = ()=>{
   declineBtn.innerHTML = 'Sorry, Button is not working';
   declineBtn.style = "background-color:red;color:black";
 }
 
-
 window.setTimeout(()=>{
    screens[0].style = "opacity:0" ;
-   screens[1].style = "opacity:1; transform:translateY(-100vh)"} ,2000) ;
+   screens[1].style = "opacity:1; transform:translateY(-100vh)";
+   document.querySelector('.play_text').style.WebkitAnimationPlayState = "running";} ,3000) ;
 
 playBtn.onclick = ()=>{
-  screens[1].style = "opacity:0"
-  screens[2].style = "transform:translateY(-200vh);opacity:1";
+  screens[1].style = "opacity:0";
+  for(let i = 0 ; i< 6; i++)
+  screens[2].children[i].style.WebkitAnimationPlayState = "running";
+  screens[2].style = "transform:translateY(-200vh);opacity:1;display:block";
+}
+accepBtn.onclick = ()=>{
+  screens[2].style = "opacity:0";
+  screens[3].style = "opacity:1; transform:translateY(-300vh)";
+  window.setTimeout(()=>{
+    screens[3].children[0].style = "transform:translateX(-300vh)";
+    screens[4].style = "opacity:1;transform:translateY(-400vh) ";
+  },2000)
+
+
 }
 
 
