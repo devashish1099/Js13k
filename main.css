@@ -172,7 +172,7 @@ body{
   font-family: 'Inconsolata', monospace;
   margin-left:12px;
   overflow: hidden;
-  letter-spacing: 2.7px;
+  letter-spacing: 1px;
   white-space: nowrap;
   font-size: 15px;
   animation: typing 5s steps(30, end) ,blink .75s infinite;
@@ -257,13 +257,26 @@ body{
   height:100vh;
   display:flex;
   justify-content: center;
-  justify-content: center;
+  align-items: center;
   text-align: center;
   color:red;
   font-size: 130px;
   letter-spacing: 10px;
   width: 90%;
   transition: all 2s ease-in-out;
+    
+  }
+  .fall_back{ 
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    text-align: center;
+    color:red;
+    font-size: 100px;
+    letter-spacing: 8px;
+    width: 90%;
+    transition: all 2s ease-in-out;
     
   }
 .game_canvas{

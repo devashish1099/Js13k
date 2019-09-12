@@ -37,8 +37,16 @@ accepBtn.onclick = ()=>{
     document.querySelector('.traps').style = "transform:translateY(-600vh) "
   },10000);
   window.setTimeout(()=>{
-    document.querySelector('.game_canvas').style = "transform:translate(30vw,-480vh );opacity:1 "
-  },12000);
+    document.querySelector('.fall_back').style = "transform:translateY(-500vh) "
+  },11000);
+  window.setTimeout(()=>{
+    document.querySelector('.fall_back').style = "transform:translateY(-900vh) "
+  },15000);
+  window.setTimeout(()=>{
+    document.querySelector('.game_canvas').style = "transform:translate(30vw,-580vh );opacity:1 "
+    for(let i = 0 ; i<screens.length-1; i++)
+    screens[i].style.opacity =0;
+  },17000);
   
 
 
