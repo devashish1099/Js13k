@@ -28,9 +28,7 @@ class Enemy extends Character {
 
         }
         else {
-            //this.alerted = true;
-            //initGrid(level1);
-            //this.alertPath = findPath(player.row, player.col,this.row, this.col);
+           
             if (this.normalPathIndex > (this.normalPath.length - 1)) {
                 this.normalPathIndex = 1;
             }
@@ -38,7 +36,7 @@ class Enemy extends Character {
             let dy = (this.normalPath[this.normalPathIndex][1] - this.normalPath[this.normalPathIndex - 1][1]);
 
             this.move(dx, dy);
-            // console.log(dx, dy);
+            
             this.normalPathIndex++;``
         }
 
@@ -70,11 +68,11 @@ class Enemy extends Character {
         if (y1 < y2) {
             y3 = y1;
         }
-        //this.startEmiting();
+       
         if (y1 == y2) {
             for (let index = 0; index < Math.abs(x2 - x1) + 1; index++) {
                 this.normalPath[index] = [];
-                //console.log(Math.abs(x2-x1));
+                
                 this.normalPath[index][0] = x3;
                 this.normalPath[index][1] = y1;
                 x3++;
@@ -82,7 +80,7 @@ class Enemy extends Character {
             x3--;
             for (let index = Math.abs(x2 - x1) + 1; index < Math.abs(x2 - x1) * 2 + 1; index++) {
                 this.normalPath[index] = [];
-                //console.log(Math.abs(x2-x1));
+                
                 x3--;
                 this.normalPath[index][0] = x3;
                 this.normalPath[index][1] = y1;

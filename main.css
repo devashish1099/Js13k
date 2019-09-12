@@ -8,7 +8,10 @@ body{
   background-color:black;
 
 }
-
+canvas{
+  top:25%;
+  left:28%;
+}
 .black{
   background-color: black
 }
@@ -281,11 +284,28 @@ body{
   }
 .game_canvas{
   color:red;
-  height:100vh;
+  height:110vh;
   position: relative;
   transition:all 1.4s ease-in-out;
   opacity:0;
 }
+
+.warning1{
+  /* opacity: 0; */
+  display:none;
+  height: 200px;
+  z-index: 200;
+  color:red;
+}
+.warning2{
+  /* opacity: 0; */
+  display:none;
+
+  height: 200px;
+  z-index: 20;
+  color:red;
+}
+
 @keyframes loading1 {
   from {
     color: white;

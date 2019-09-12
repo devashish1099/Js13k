@@ -1,53 +1,52 @@
-
-
 const loadingScreen = document.querySelector('.loading_screen'),
-gameMenuScreen = document.querySelector('.game_menu_screen'),
-storyScreen= document.querySelector('.story_screen'),
-gameCanvasScreen = document.querySelector('.game_canvas'),
-screens = [loadingScreen,gameMenuScreen,storyScreen,gameCanvasScreen],
-declineBtn = document.querySelector('.decline'),
-accepBtn = document.querySelector('.accept'),
-playBtn = document.querySelector('#img');
-declineBtn.onclick = ()=>{
+  gameMenuScreen = document.querySelector('.game_menu_screen'),
+  storyScreen = document.querySelector('.story_screen'),
+  gameCanvasScreen = document.querySelector('.game_canvas'),
+  screens = [loadingScreen, gameMenuScreen, storyScreen, gameCanvasScreen],
+  declineBtn = document.querySelector('.decline'),
+  accepBtn = document.querySelector('.accept'),
+  playBtn = document.querySelector('#img');
+declineBtn.onclick = () => {
   declineBtn.innerHTML = 'Sorry, Button is not working';
   declineBtn.style = "background-color:red;color:black";
 }
 
-window.setTimeout(()=>{
-   screens[0].style = "opacity:0";
-   screens[1].style = "opacity:1; transform:translateY(-100vh)";
-   document.querySelector('.play_text').style.WebkitAnimationPlayState = "running";} ,3000) ;
+window.setTimeout(() => {
+  screens[0].style = "opacity:0";
+  screens[1].style = "opacity:1; transform:translateY(-100vh)";
+  document.querySelector('.play_text').style.WebkitAnimationPlayState = "running";
+}, 3000);
 
-playBtn.onclick = ()=>{
+playBtn.onclick = () => {
   screens[1].style = "opacity:0";
-  for(let i = 0 ; i< 6; i++)
-  screens[2].children[i].style.WebkitAnimationPlayState = "running";
+  for (let i = 0; i < 6; i++)
+    screens[2].children[i].style.WebkitAnimationPlayState = "running";
   screens[2].style = "transform:translateY(-200vh);opacity:1;display:block";
 }
-accepBtn.onclick = ()=>{
+accepBtn.onclick = () => {
   screens[2].style = "opacity:0";
   document.querySelector('.find_the_exit').style = "transform:translateY(-300vh) ";
-  window.setTimeout(()=>{
+  window.setTimeout(() => {
     document.querySelector('.find_the_exit').style = "transform:translateY(-400vh)"
-  },4000);
-  window.setTimeout(()=>{
+  }, 4000);
+  window.setTimeout(() => {
     document.querySelector('.traps').style = "transform:translateY(-400vh) "
-  },4500);
-  window.setTimeout(()=>{
+  }, 4500);
+  window.setTimeout(() => {
     document.querySelector('.traps').style = "transform:translateY(-600vh) "
-  },10000);
-  window.setTimeout(()=>{
+  }, 10000);
+  window.setTimeout(() => {
     document.querySelector('.fall_back').style = "transform:translateY(-500vh) "
-  },11000);
-  window.setTimeout(()=>{
+  }, 11000);
+  window.setTimeout(() => {
     document.querySelector('.fall_back').style = "transform:translateY(-900vh) "
-  },15000);
-  window.setTimeout(()=>{
-    document.querySelector('.game_canvas').style = "transform:translate(30vw,-580vh );opacity:1 "
-    for(let i = 0 ; i<screens.length-1; i++)
-    screens[i].style.opacity =0;
-  },17000);
-  
+  }, 15000);
+  window.setTimeout(() => {
+    document.querySelector('.game_canvas').style = "transform:translateY(-611vh );opacity:1 "
+    // for (let i = 0; i < screens.length - 1; i++)
+    //   screens[i].style = "visibility:none";
+  }, 17000);
+
 
 
 
@@ -57,11 +56,23 @@ let canvas1 = document.getElementById("canvas1");
 let ctx1 = canvas1.getContext("2d");
 let canvas2 = document.getElementById("canvas2");
 let ctx2 = canvas2.getContext("2d");
+let canvas3 = document.getElementById("canvas3");
+let ctx3 = canvas3.getContext("2d");
+let canvas4 = document.getElementById("canvas4");
+let ctx4 = canvas4.getContext("2d");
 
 canvas1.width = GAME_WIDTH;
 canvas1.height = GAME_HEIGHT;
 canvas2.width = GAME_WIDTH;
 canvas2.height = GAME_HEIGHT;
+canvas3.width = GAME_WIDTH;
+canvas3.height = GAME_HEIGHT+100;
+canvas4.width = GAME_WIDTH;
+canvas4.height = GAME_HEIGHT+100;
+ctx3.font = "50px Georgia";
+ctx3.fillStyle = "red";
+
+
 
 let currentLevel = -1;
 let time = 0;
@@ -83,7 +94,10 @@ function renderObject() {
 
 
 function startLevel(level) {
+  // document.querySelector('.warning1').style = "display:none";
+  // document.querySelector('.warning2').style = "display:none";
   ctx2.fillStyle = "white";
+  ctx3.clearRect(0, 0 , canvas3.width, canvas3.height);
 
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
   enemies.splice(0, enemies.length);
@@ -92,7 +106,7 @@ function startLevel(level) {
   initGrid(level);
   let rows = level.rows;
   let cols = level.columns;
- 
+
   grid = new Grid(40, 0, rows, cols, CELL_WIDTH);
   grid.init(level.grid);
   grid.draw(CTX);
@@ -100,7 +114,7 @@ function startLevel(level) {
   player = new Character(level.playerAt[0], level.playerAt[1]);
 
   for (let index = 0; index < level.enemiesAt.length; index++) {
-    
+
 
     enemies.push(new Enemy(level.enemiesAt[index][0], level.enemiesAt[index][1]));
     enemies[index].normalPath = level.enemiesAt[index].slice();
@@ -164,18 +178,24 @@ function update() {
     startLevel(levels[currentLevel]);
   }
 
-  function fallback(){
+  function fallback() {
     ctx2.fillStyle = "grey";
-    if(currentLevel > 0)
+    if (currentLevel > 0)
       currentLevel--;
     startLevel(levels[currentLevel]);
   }
+
   function disappearPlayer() {
     ctx2.fillStyle = "black";
   }
   for (enemyIndex in enemies) {
     if (player.shareSameCell(enemies[enemyIndex])) {
       ctx2.fillStyle = "red";
+      ctx3.fillStyle = "black";
+      ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
+      ctx3.fillStyle = "red";
+      ctx3.fillText("YOU WERE CAUGHT", 0, GAME_HEIGHT/2);
+      // document.querySelector('.warning2').style = "display:block";
       setTimeout(disappearPlayer, 300);
       setTimeout(restartLevel, 1000);
     }
@@ -183,45 +203,53 @@ function update() {
   for (trapIndex in levels[currentLevel].trapsAt) {
     if (player.isAtCell(levels[currentLevel].trapsAt[trapIndex][0], levels[currentLevel].trapsAt[trapIndex][1])) {
       ctx2.fillStyle = "grey";
-      fallback();
+      ctx3.fillStyle = "black";
+      ctx3.fillRect(0, 0, canvas3.width, canvas3.height);
+      ctx3.fillStyle = "red";
+      ctx3.fillText("YOU FELL INTO TRAP", 0, GAME_HEIGHT/2);
+      // document.querySelector('.warning1').style = "display:block";
+      setTimeout(fallback,1000);
     }
   }
-    renderObject();
-    if (player.isAtCell(levels[currentLevel].exitAt[0], levels[currentLevel].exitAt[1])) {
-      currentLevel++;
-      currentLevel = currentLevel % levels.length;
-      startLevel(levels[currentLevel]);
+  renderObject();
+  if (player.isAtCell(levels[currentLevel].exitAt[0], levels[currentLevel].exitAt[1])) {
+    currentLevel++;
+    if(currentLevel > levels.length - 1){
+      alert("Game Completed! More levels coming soon. Thanks for playing");
+    }
+    currentLevel = currentLevel % levels.length;
+    startLevel(levels[currentLevel]);
+
+  }
+}
+
+var ct = 0;
+
+function globalWave() {
+  ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+
+  for (let i = 0; i < waves.length; i++) {
+    waves[i].waveEmiter();
+    waves[i].wt++;
+    if (waves[i].wt > 45) {
+      waves[i].waveReset();
 
     }
   }
 
-  var ct = 0;
+  if (ct > 45) {
+    for (let i = 0; i < enemies.length; i++) {
+      enemies[i].displacement();
 
-  function globalWave() {
-    ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-
-    for (let i = 0; i < waves.length; i++) {
-      waves[i].waveEmiter();
-      waves[i].wt++;
-      if (waves[i].wt > 45) {
-        waves[i].waveReset();
-
-      }
     }
-
-    if (ct > 45) {
-      for (let i = 0; i < enemies.length; i++) {
-        enemies[i].displacement();
-
-      }
-      initGrid(levels[currentLevel]);
-      ct = 0;
-    }
-    ct++;
-
-
+    initGrid(levels[currentLevel]);
+    ct = 0;
   }
+  ct++;
 
-  setInterval(globalWave, 1000 / 60);
 
-  setInterval(update, 1000 / 40);
+}
+
+setInterval(globalWave, 1000 / 60);
+
+setInterval(update, 1000 / 40);
