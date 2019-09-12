@@ -1,14 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <link rel = "stylesheet" href = "main.css"/>
+  <link rel="stylesheet" href="main.css" />
 </head>
-<body style="margin: 0px">
 
-    <canvas id = "canvas" >Sorry Your browser doesn't support Canvas.</canvas>
+<body style=" margin: 0px">
+  <div class="main_wrapper">
 
-    <script src = "geometry.js"></script>
-    <script src = "init.js"></script>
-    <script src = "main.js"></script>
+    <div class="loading_screen black">
+      <div class="game_title">
+        <span class="part1">
+          WATCH YOUR
+        </span>
+        <span class="part2">
+          BACK
+        </span>
+      </div>
+      <div class="loading_text">
+        LOADING
+        <span>.</span>
+        <span>.</span>
+        <span>.</span>
+      </div>
+    </div>
+    <div class="game_menu_screen ">
+      <div class="game_play_button flex">
+        <img id="img" src="res/images/play-button (1).svg">
+        <div class="play_text">DIVE <span> IN</span></div>
+      </div>
+    </div>
+    <div class="story_screen">
+      <P>You are a British SPY, working for the secret cell of government. Your Organisation has got an INTEL that a
+        terrorist group, known as MASIHA </P>
+      <P>has developed a Secret WEAPON on an "ISLAND" that can be a threat for Mankind . Your MISSION "SHOULD YOU CHOOSE
+        TO ACCEPT IT" ??? </P>
+      <P>is to infiltrate their island , dismantle their "WEAPOON" and collect the DATA </P>
+      <P>you will be on your own on that island full of MASIHAS and you should know if you get caught then THE
+        GOVERNMENT WOULD DISOWN YOU AND WILL </P>
+      <P>TAKE NO RESPONSIBILITY FOR YOUR ACTIONS . So be careful and WATCH YOUR BACK ...................</P>
+      <P>BEAWARE OF TRAPS , </P>
+      <div class="button_wrapper flex">
+        <button class="accept"> Accept</button>
+        <button class="decline">Decline</button>
+      </div>
+
+    </div>
+    <div class="find_the_exit black">FIND THE EXIT </div>
+    <div class="traps black">BEWARE OF TRAPS </div>
+    <div class="fall_back black">THEY MAKE YOU FALL BACK </div>
+
+    <div class="game_canvas black" style="position:relative">
+      <!-- HELLO BUDDY -->
+      <canvas id="canvas" style="position: absolute"></canvas>
+      <canvas id="canvas1" style="position: absolute"></canvas>
+      <canvas id="canvas2" style="position: absolute"></canvas>
+      <!-- <div class="warning1 " style="position: absolute;">YOU FELL BACK</div>
+      <div class="warning2" style="position: absolute;">YOU WERE CAUGHT </div> -->
+
+      <canvas id="canvas3" style="position: absolute"></canvas>
+      <canvas id="canvas4" style="position: absolute"></canvas>
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+  <script src="js/geometry.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/controller.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/enemy.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/pathFinder.js"></script>
+
+  <script src="js/init.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>

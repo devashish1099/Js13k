@@ -1,18 +1,11 @@
-const SCALE_X = (1/2) * window.innerWidth / 100;
-const SCALE_Y = (1/2) * window.innerHeight / 100;
+
 const OFFSET_X = window.innerWidth / 4;
 const OFFSET_Y = window.innerHeight / 4;
+
 class Point{
     constructor(x, y){
         this.x = x;
         this.y = y;
-    }
-}
-
-class Line{
-    constructor(p1, p2){
-        this.p1 = p1;
-        this.p2 = p2;
     }
 }
 
@@ -30,11 +23,10 @@ class Polygon{
 }
 
 function render(ctx, polygon){
-
     ctx.beginPath();
-    ctx.moveTo( SCALE_X * polygon.points[0].x + OFFSET_X, SCALE_Y * polygon.points[0].y + OFFSET_Y);
+    ctx.moveTo( SCALE_X * polygon.points[0].x, SCALE_Y * polygon.points[0].y);
     for(let i = 1; i < polygon.points.length; i++){
-        ctx.lineTo( SCALE_X * polygon.points[i].x + OFFSET_X, SCALE_Y * polygon.points[i].y + OFFSET_Y);
+        ctx.lineTo( SCALE_X * polygon.points[i].x, SCALE_Y * polygon.points[i].y);
     }
     ctx.closePath();
     ctx.stroke();
